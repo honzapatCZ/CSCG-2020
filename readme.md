@@ -2,6 +2,17 @@
 
 Hi! This is my documentation(and kinda write up) of solving CSCG-2020 game hacking challenges.
 
+## Follow White Rabbit
+
+### 1st
+Quick look at folder structure shows its unity. _Data/Managed/Assembly-CSharp.dll so DnSpy to the rescue.
+Yes its not obduscated. I open the game. Follow the first rabbit. Jump down and oh. I died.
+So dnspy, ok theres PlayerController, and Die(), lets see who it uses. Ok deleted from Controller_Hit.
+And yes, first flag.
+1st challenge done.
+### 2nd
+So you say there is supposed to be house under construction(I got over the wall finding a spot where the wall is small enough). OK lets see where I can OnGUI(old IMGUI Unity rendering method) something. You know what why not use PlayerController. OK I got Button. OK I got All Levels in game listed. Hmm a FlagLand_Update.
+Now where I can get some action. So you say something about UI. And there is this if with multiple Input.GetKeyDown(). Hmm lets try it. OK So I didnt need to edit I could have just pressed FLAG all the time, whatever, now to use it. So change it to SceneManager.LoadScene("Flagland_Update", LoadMode.Additive) and boom, there is the update. Ah shit. I dont want to do that parkour. Lets change the Jump behaviour, lets say add 50. And ok Iam up. now just how to get thru the bars. So just somewhere to check for Input.getkeydown(lets say n) and set the player position 1 forward. AAAAND iam there. Now the hardest part to actually understand whats that combination of text and image. After some assumption flag submitted.
 
 ## Maze
 
@@ -33,16 +44,3 @@ So cheat engine it is.
 After 30 ptrscans I found the position pointer, so I can start overriding it. Done.
 So wait I still cant move. Quick CE about what writes to that address and few more lines of code.
 And yeeees I can fly up, so I completed lava. Tower was pretty similiar, but just too lengthy.
-
-
-## Follow White Rabbit
-
-### 1st
-Quick look at folder structure shows its unity. _Data/Managed/Assembly-CSharp.dll so DnSpy to the rescue.
-Yes its not obduscated. I open the game. Follow the first rabbit. Jump down and oh. I died.
-So dnspy, ok theres PlayerController, and Die(), lets see who it uses. Ok deleted from Controller_Hit.
-And yes, first flag.
-1st challenge done.
-### 2nd
-So you say there is supposed to be house under construction(I got over the wall finding a spot where the wall is small enough). OK lets see where I can OnGUI(old IMGUI Unity rendering method) something. You know what why not use PlayerController. OK I got Button. OK I got All Levels in game listed. Hmm a FlagLand_Update.
-Now where I can get some action. So you say something about UI. And there is this if with multiple Input.GetKeyDown(). Hmm lets try it. OK So I didnt need to edit I could have just pressed FLAG all the time, whatever, now to use it. So change it to SceneManager.LoadScene("Flagland_Update", LoadMode.Additive) and boom, there is the update. Ah shit. I dont want to do that parkour. Lets change the Jump behaviour, lets say add 50. And ok Iam up. now just how to get thru the bars. So just somewhere to check for Input.getkeydown(lets say n) and set the player position 1 forward. AAAAND iam there. Now the hardest part to actually understand whats that combination of text and image. After some assumption flag submitted.
